@@ -1,0 +1,472 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    overflow-x: hidden;
+}
+
+.intro{
+    background: #FFCD9E;
+    text-align: center;
+    max-width: 1800px
+}
+
+nav{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-top: 10px;   
+}
+
+.menu {
+    display: flex;
+}
+
+.menu li{
+    list-style-type: none;
+    margin-right: 20px;
+    font-size: 22px;
+}
+
+.menu a {
+    text-decoration: none;
+    list-style-type: none;
+    color: black;
+    font-family: 'Raleway', sans-serif;
+}
+
+.cart{
+    display: flex;
+    align-items: center;
+}
+.cart-icon{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 50px;
+    padding: 13px;
+    cursor: pointer;
+    background: #FF7A00;
+    outline: none;
+    border: none;
+}
+
+
+.cart-icon span{
+    color: #fff;
+    font-size: 20px;
+    margin-left: 10px;
+}
+
+.frontal{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.frontal > h1{
+    font-size: 4rem;
+    padding: 30px;
+    color: #FF7A00;
+    text-align: start;
+    text-transform: uppercase;
+    font-family: 'Poppins', sans-serif;
+    
+}
+
+#shop-now{
+    color: #fff;
+    background: #FF7A00;
+    outline: none;
+    text-transform: uppercase;
+    border: none;
+    font-weight: bold;
+    font-size: 15px;
+    width: 300px;
+    cursor: pointer;
+    padding: 20px;
+    margin-bottom: 40px;
+    border-radius: 10px;
+    font-family: 'Raleway', sans-serif;
+}
+
+.product-link{
+    text-decoration: none;
+    list-style-type: none;
+    color: #fff;
+}
+#about{
+    height: 250px;
+    background-color: black;
+    padding: 50px 45px;
+    margin: 0;
+}
+
+#about p{
+    color: white;
+    text-align: center;
+    font-size: 1.2em;
+    font-family: 'Nunito', sans-serif;
+}
+
+#products{
+    margin-top: 25px;
+    /* max-width: 1200px; */
+    /* margin: 0 auto; */
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 10px;
+}
+
+@media screen and (max-width: 1000px){
+    #products{
+        grid-template-columns: 1fr 1fr;
+    }
+
+}
+
+@media screen and (max-width: 800px){
+    #products{
+        grid-template-columns: 1fr;
+    }
+}
+.products-title{
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+    margin: 20px 0;
+    text-transform: uppercase;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.product-item{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    /* width: 100%; */
+    /* height: 100vh; */
+    
+}
+
+.product-item-img{
+    position: relative;
+}
+
+.item-img{
+    display: block;
+    width: 100%;
+}
+
+.product-img-overlay{
+    font-family: 'Raleway', sans-serif;
+    font-size: 19px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 393px;
+    color: white;
+    background: rgba(0, 0, 0, 0.65);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    cursor: pointer;
+    transition: opacity 0.25s;
+}
+
+.product-img-overlay:hover{
+    opacity: 1;
+    overflow: hidden;
+}
+
+.overlay-title{
+    text-decoration: underline;
+    margin-bottom: 40px;
+    font-weight: bold;
+    font-size: 1.3em;
+}
+
+.price{
+    font-size: 50px;
+    
+}
+
+
+
+.product-item > .title {
+    font-weight: bold;
+    font-size: 25px;
+    text-transform: uppercase;
+    margin: 20px 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+.add-to-cart{
+    color: #000;
+    background: #FF9A3D;
+    outline: none;
+    text-transform: uppercase;
+    border: none;
+    font-weight: bold;
+    font-size: 15px;
+    width: 300px;
+    cursor: pointer;
+    padding: 20px;
+    margin-bottom: 40px;
+    border-radius: 10px;
+    font-family: 'Raleway', sans-serif;
+}
+
+.cart-content{
+    font-family: 'Raleway', sans-serif;
+    margin: auto;
+    display: none;
+    position: absolute; 
+    transition: all 10000ms ease-in-out;
+    z-index: 1; /* Sit on top */
+    left: 25%;
+    top: 2%;
+    width: 50%; /* Full width */
+  /* height: 60%;  */
+  /* overflow: hidden; Enable scroll if needed */
+  /* background-color: rgb(0,0,0); Fallback color */
+  /* background-color: rgba(0,0,0,0.4); Black w/ opacity */
+    background:rgba(255,255,255, 1);
+  
+}
+
+
+.table-header{
+    border-collapse: collapse;
+    font-size: .9em;
+    margin: 15px 0;
+    min-width: 400px;
+    font-family: 'Raleway', sans-serif;
+}
+
+.table-header thead tr{
+    text-align: left;
+    font-weight: bold;
+}
+
+.table-header th,
+.table-header td {
+    padding: 12px 25px;
+}
+
+.table-content tr{
+    border-bottom: 1px solid #dddddd;
+    font-weight: bold;
+}
+
+.root{
+    margin: 0 10px;
+}
+
+.container{
+    display: flex;
+}
+
+.quantity-btn{
+    width: 70px;
+    outline: none;
+    border: none;
+    background: #FF9A3D;
+    border-radius: 50px;
+    font-size: 20px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.remove-cart-item{
+    background: #FFCD9E;
+    border: none;
+    outline: none;
+    padding: 5px 10px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+
+.checkout-form{
+    margin: 10px;
+}
+.form-control{
+    margin-bottom: 10px;
+    /* max-width: 300px; */
+    margin: auto;
+}
+
+input{
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background: #FFCD9E;
+    /* border: 3px solid #dddddd; */
+    border-radius: 2px;
+}
+
+input:focus{
+    outline: 0;
+    border-color: #777;
+}
+
+.form-control div{
+    color: #e74c3c;
+    text-align: center;
+    visibility: hidden;
+}
+
+.form-control.error div {
+	visibility: visible;
+    color: #e74c3c;
+    margin-bottom: 12px;
+}
+
+.form-control.error input {
+	border-color: #e74c3c;
+}
+
+.form-control.success input {
+	border-color: #2ecc71;
+}
+
+
+
+/* .form-control input{
+    display: block;
+    width: 50%;
+    margin: 15px 0 15px 50px;
+    background-color: #FFCD9E;
+    color: grey;
+    padding: 10px;
+}
+
+.form-control input:focus {
+	outline: 0;
+	border-color: #777;
+}
+
+.form-control.success input {
+	border-color: #2ecc71;
+}
+
+.form-control.error input {
+	border-color: #e74c3c;
+}
+
+.form-control small {
+	color: #e74c3c;
+	display: none;
+    
+} */
+
+/* .error-msg{
+    color: #e74c3c;
+    text-align: center;
+    font-size: 13px;
+    margin-bottom: 10px;
+} */
+
+
+
+.purchase-message {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+  text-align: center;
+}
+
+#total {
+    margin-bottom: 12px;
+}
+
+.purchase-buttons{
+    display: flex;
+    justify-content: flex-end;
+}
+
+#continue-shopping{
+    font-family: 'Raleway', sans-serif;
+    background-color: #FFCD9E;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    border-radius: 10px;
+    padding: 15px 20px;
+    cursor: pointer;
+    margin: 10px 5px 10px 5px;
+}
+
+#checkout{
+    font-family: 'Raleway', sans-serif;
+    background-color: #FF7A00;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    border-radius: 10px;
+    padding: 15px 50px;
+    color: #fff;
+    cursor: pointer;
+    margin: 10px 5px 10px 5px;
+}
+
+footer{
+    margin-top: 30px;
+    height: 150px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 40px;
+    background-color: black;
+    margin: 0;
+}
+
+footer h3{
+    color: white;
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+}
+
+
+
+@media screen and (max-width: 800px){
+    .logo{
+        display: none;
+    }
+
+    nav{
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        padding-top: 10px;   
+    }
+
+    .frontal{
+        display: flex;
+        flex-direction: column;
+    }
+    .frontal > h1{
+        text-align: center;
+        font-size: 2.5rem;
+        padding: 10px;
+
+    }
+
+    footer{
+        display: flex;
+        flex-direction: column;
+    }
+    footer h3{
+        margin-top: 20px;
+    }
+
+   
+}
