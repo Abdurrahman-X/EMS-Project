@@ -60,6 +60,7 @@ for (let i = 0; i < cartButtons.length; i++) {
     cartButtons[i].addEventListener('click', addToCart);
 }
 
+
 // ADD ITEM TO CART 
 function addToCart(e) {
     
@@ -77,6 +78,7 @@ function addToCart(e) {
     var title = Item.name;
     var price = Item.price;
     var Id  = Item.id;
+    var Index = Item.index;
 
     // var itemsInCart = document.getElementsByClassName('cart-title');
     // for (let i = 0; i < itemsInCart.length; i++) {
@@ -90,7 +92,7 @@ function addToCart(e) {
             <td class = "cart-price"> ${price}</td>
             <td>
                 <div class="container">
-                    <button class = "quantity-btn quantity-btn-minus ${price} ${Id} ">-</button>
+                    <button class = "quantity-btn quantity-btn-minus  ${price} ${Id} ">-</button>
                     <h2 class="root"> 1 </h2>
                     <button class = "quantity-btn quantity-btn-plus ${price} ${Id}">+</button><br>
                 </div>
@@ -126,8 +128,8 @@ function addToCart(e) {
             
             for (let i = 0; i < allClasses.length; i++) {
                 if (i === 2) {
-                    basePrice = parseInt(allClasses[2])
-                    //console.log(parseInt(allClasses[2]));
+                    basePrice = parseInt(allClasses[2]);
+
                 }
                 if (i === 3) {
                     itemId = allClasses[3];
@@ -227,7 +229,7 @@ function removeCartItem(e) {
     }
     targetButton.parentElement.parentElement.remove();
     cartCounter.innerHTML--;
-    sN--;
+    
 
     updateCartTotal();
 
@@ -236,25 +238,20 @@ function removeCartItem(e) {
  
 function updatePrice(e, itemId, basePrice) {
     let targetButton = e.target;
-        let targetChild = document.querySelector(`#${itemId} .cart-price`);
-        //console.log(targetChild);
-        //console.log(`#${itemId}`);
-
-        //let Price = parseInt(targetChild.innerText);
-        //console.log(Price);
-        
+        let targetChild = document.querySelector(`#${itemId} .cart-price`);        
         let targetQuantity = document.querySelector(`#${itemId} .root`);
         //console.log(targetQuantity);
         //console.log(itemId);
         let quantity = targetQuantity.innerText;
         //console.log(quantity);
 
+        console.log(basePrice);
         let newPrice = basePrice * quantity;
         targetChild.innerText = newPrice;
 }
 
 
-// UPDATE CART ITEM PRICES
+// UPDATE CART TOTAL
 function updateCartTotal() {
     
     let total = 0;
@@ -265,26 +262,14 @@ function updateCartTotal() {
         let itemRow = itemRows[i]
         //console.log(itemRow);
         let priceElements = itemRow.getElementsByClassName('cart-price');
+        //console.log(priceElements);
         for (let i = 0; i < priceElements.length; i++) {
-            priceElement = parseInt(priceElements[i].innerText);
+            priceElement = parseInt(priceElements[i].innerText.replace('₦',''));
             total = total + priceElement
         }
-        // let quantityElements = itemRow.getElementsByClassName('root');
-        // for (let i = 0; i < quantityElements.length; i++) {
-        //     quantityElement = quantityElements[i];
-        //     //console.log(quantityElement);
-            
-        // }
-        // let Price = parseInt(priceElement.innerText);
-        // let quantity = quantityElement.innerText;
-        
-        //let newPrice = quantity;
-        //console.log(newPrice);
-        //total = total + newPrice;
     }
-         //console.log(total);
          let cartTotal = document.getElementById('total');
-         cartTotal.innerText = `${total}`;
+         cartTotal.innerText = `₦${total}`;
 }
 
 // CHECKOUT FORM
@@ -296,47 +281,113 @@ const buyerName = document.getElementById('buyer-name');
 const buyerMail = document.getElementById('buyer-email');
 const telephone = document.getElementById('buyer-number');
 const error = document.getElementsByClassName('error-msg');
+checkoutForm.addEventListener('click', checkOut);
 
 
-function validateName() {
-    const buyerNameValue = buyerName.value.trim();     
-    if (buyerNameValue == '' || buyerNameValue == null) {
+// CHECKOUT FUNCTION
+function checkOut() {
+    let allValid;
+        let totalPrice = document.querySelector('#total');
+        if (parseInt(totalPrice.innerText.replace('₦', '')) === 0) {
+            alert('You need to select an item first' );
+            return;
+        }
+
+
+    const buyerNameValue = buyerName.value.trim();    
+    
+    if (buyerNameValue === '' || buyerNameValue === null) {
         setErrorFor(buyerName, 'Please enter your name');
+        allValid = false;
+        
     } else{
         setSuccessFor(buyerName);
+        allValid = true;
     }
-}
 
-function validateMail() {
-    
-    
     const buyerMailValue = buyerMail.value.trim();
     if (buyerMailValue == '') {
         setErrorFor(buyerMail, 'Please an enter an email');
+        allValid = false;
     } else if (!buyerMailValue.includes('@')) {
         setErrorFor(buyerMail, 'Invalid Email');
+        allValid = false;
     } else{
         setSuccessFor(buyerMail);
-        
+        allValid = true;
     }
-}
+   
 
-function validatePhone() {
-    
     const telephoneNum = telephone.value.trim(); 
     if (telephoneNum == '') {
         setErrorFor(telephone, 'Please enter your telephone number');
+        allValid = false;
     // } else if (typeof(telephoneNum != 'number')) {
     //     setErrorFor(telephone, 'Phone number can only be numbers');
     } else if (telephoneNum.length < 11 || telephoneNum.length > 11) {
         setErrorFor(telephone, 'Phone number cannot be less than 11 characters');
+        allValid = false;
+    } else{
+        setSuccessFor(telephone);
+        allValid = true;
+    }
+     
+    if (allValid == true) {
+        //console.log(allValid);
+        closeModal();
+        payWithPaystack();
+    }
+    
+    
+}
+
+// NAME VALIDATION
+function validateName() {
+    
+    const buyerNameValue = buyerName.value.trim();    
+    if (buyerNameValue === '' || buyerNameValue === null) {
+        setErrorFor(buyerName, 'Please enter your name');
+       
+    } else{
+        setSuccessFor(buyerName);
+      
+    }
+}
+
+// MAIL VALIDATION
+function validateMail() {
+  
+    const buyerMailValue = buyerMail.value.trim();
+    if (buyerMailValue == '') {
+        setErrorFor(buyerMail, 'Please an enter an email');
+       
+    } else if (!buyerMailValue.includes('@')) {
+        setErrorFor(buyerMail, 'Invalid Email');
+      
+    } else{
+        setSuccessFor(buyerMail);
+    }
+}
+
+// PHONE NUMBER VALIDATION
+function validatePhone() {
+
+    const telephoneNum = telephone.value.trim(); 
+    if (telephoneNum == '') {
+        setErrorFor(telephone, 'Please enter your telephone number');
+      
+    // } else if (typeof(telephoneNum != 'number')) {
+    //     setErrorFor(telephone, 'Phone number can only be numbers');
+    } else if (telephoneNum.length < 11 || telephoneNum.length > 11) {
+        setErrorFor(telephone, 'Phone number cannot be less than 11 characters');
+      
     } else{
         setSuccessFor(telephone);
        
     }
 }
 
-
+// VALIDATION ERROR
 function setErrorFor(input, errorMessage) {
     const formControl = input.parentElement;
 	const small = formControl.querySelector('.form-control div');
@@ -344,6 +395,8 @@ function setErrorFor(input, errorMessage) {
 	small.innerText = errorMessage;
     //error.className = 'error-msg';
 }
+
+// VALIDATION SUCCESS
 function setSuccessFor(input) {
 	const formControl = input.parentElement;
 	formControl.className = 'form-control success';
@@ -351,64 +404,72 @@ function setSuccessFor(input) {
 
 
 
-checkoutForm.addEventListener('click', checkOut);
 
-function checkOut() {
-
-    validateName();
-    validateMail();
-    validatePhone();    
-
-   
-    
-    if (validateName && validateMail && validatePhone) {
-       //console.log(true);
-       let totalPrice = document.querySelector('#total');
-       if (parseInt(totalPrice.innerText) === 0) {
-        alert('You need to select an item first' );
-     }
-    }
-
-    
-
-    //payWithPaystack();
-    // closeModal()
-}
 
 continueShopping.addEventListener('click', closeModal);
 
+//window.onclick = closeModal;
+// CLOSE CART
 function closeModal() {
     document.querySelector(".cart-content").style.display = "none"
 }
 
-    
 
 
 
-       
-// function payWithPaystack() {
 
-//     let handler = PaystackPop.setup({
-//       key: 'pk_test_a230251758fb3ae6afc26dde5f95ca6386f05aeb', // Replace with your public key
-//       email: document.getElementById("buyer-email").value,
-//       amount: document.getElementById("total").innerText * 100,
-//       ref: ''+Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
-//       // label: "Optional string that replaces customer email"
-//       onClose: function(){
-//         alert('Window closed.');
-//       },
-//       callback: function(response){
-//         let message = 'Payment complete! Reference: ' + response.reference;
-//         alert(message);
-//       }
-//     });
-//     handler.openIframe();
-//   }
+// INTEGRATE PAYSTACK
+function payWithPaystack() {
+    let handler = PaystackPop.setup({
+      key: 'pk_test_a230251758fb3ae6afc26dde5f95ca6386f05aeb', // Replace with your public key
+      email: document.getElementById("buyer-email").value,
+      amount: document.getElementById("total").innerText.replace('₦', '') * 100,
+      ref: ''+Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+      // label: "Optional string that replaces customer email"
+      onClose: function(){
+        alert('Window closed.');
+      },
+      callback: function(response){
+        showSummary()
+      }
+    });
+    handler.openIframe();
+  }
         
     
+function showSummary() {
+    document.getElementById('summary').style.display = 'flex';
+    document.getElementById('summary').style.flexDirection = 'column';
+    document.getElementById('summary').style.justifyContent = 'space-around';
+    document.querySelector('#customer-name').innerHTML = buyerName.value;
+    const Summary = document.querySelector('#summary-content')
+    const itemRow = document.querySelectorAll('.cart-item-row');
+    console.log(itemRow);
+
+    itemRow.forEach((element, index) => {
+       let itemName = element.getElementsByClassName('cart-title')[0].innerText;
+      // console.log(itemName);
+       let itemQty = element.getElementsByClassName('root')[0].innerText;
+       //console.log(itemQty);
 
 
+       let summaryContent = `
+    
+    <tr>
+        <td>${index + 1}</td>
+        <td>${itemName}</td>
+        <td>${itemQty}</td>
+    </tr>
+`
+Summary.innerHTML += summaryContent;
+    });
 
+    
+    
+    
+    
+    
+}
 
 
 

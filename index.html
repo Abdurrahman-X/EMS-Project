@@ -122,7 +122,7 @@
                     <tr>
                         <th>S/N</th>
                         <th>ITEM</th>
-                        <th>PRICE</th>
+                        <th>PRICE (₦)</th>
                         <th>QUANTITY</th>
                     </tr>
 
@@ -178,14 +178,36 @@
 
             <div class="purchase-message">
                 <h3>Total Amount to be Paid</h3>
-                <h3 id="total">0</h3>
+                <h3 id="total">₦0</h3>
             </div>
                 <div class="purchase-buttons">
                     <button id="continue-shopping">Continue Shopping</button>
                     <button id="checkout">Checkout</button>
-                </div>
-            
+                </div>    
     </section>
+
+    <section id = "summary">
+         <h1>Thank You, <span id="customer-name"> Abolaji Abdurrahman Sholabomi</span>, Your Order Has been Received</h1>
+
+         <i class="fa fa-user-circle-o"></i>
+         <h2>Summary</h2>
+        <table class="table-header">
+            <thead>
+                <tr>
+                    <th>S/N</th>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody id="summary-content">
+               
+            </tbody>
+        </table>
+        <div class="summary-container">
+            <button id="summary-btn">OK</button>
+        </div>
+    </section>
+        
 
     <footer>
         <img src="images/EMS.svg" alt="logo">

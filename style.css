@@ -237,7 +237,8 @@ nav{
   /* overflow: hidden; Enable scroll if needed */
   /* background-color: rgb(0,0,0); Fallback color */
   /* background-color: rgba(0,0,0,0.4); Black w/ opacity */
-    background:rgba(255,255,255, 1);
+    background:rgba(255,255,255);
+    opacity: 0.95;
   
 }
 
@@ -338,44 +339,6 @@ input:focus{
 }
 
 
-
-/* .form-control input{
-    display: block;
-    width: 50%;
-    margin: 15px 0 15px 50px;
-    background-color: #FFCD9E;
-    color: grey;
-    padding: 10px;
-}
-
-.form-control input:focus {
-	outline: 0;
-	border-color: #777;
-}
-
-.form-control.success input {
-	border-color: #2ecc71;
-}
-
-.form-control.error input {
-	border-color: #e74c3c;
-}
-
-.form-control small {
-	color: #e74c3c;
-	display: none;
-    
-} */
-
-/* .error-msg{
-    color: #e74c3c;
-    text-align: center;
-    font-size: 13px;
-    margin-bottom: 10px;
-} */
-
-
-
 .purchase-message {
   display: block;
   margin-left: auto;
@@ -418,6 +381,73 @@ input:focus{
     margin: 10px 5px 10px 5px;
 }
 
+#summary{
+    margin: auto;
+    display: none;
+    margin: auto;
+    display: none;
+    position: absolute; 
+    z-index: 1; 
+    left: 25%;
+    top: 2%;
+    width: 50%;
+    height: 100vh; 
+    background:rgba(255,255,255);
+    opacity: 0.9;
+}
+
+#summary span {
+    color: #FF7A00;
+}
+#summary h1, h2{
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+}
+
+#summary-content tr {
+    border-bottom: 1px solid #dddddd;
+    font-weight: bold;
+}
+
+#summary table{
+    /* text-align: center; */
+}
+.summary-container{
+    display: flex;
+    justify-content: flex-end;
+}
+#summary-btn{
+    color: #000;
+    background: #FF9A3D;
+    outline: none;
+    text-transform: uppercase;
+    border: none;
+    font-weight: bold;
+    font-size: 15px;
+    width: 100px;
+    cursor: pointer;
+    padding: 10px;
+    margin: 0 7px 10px 0;
+    border-radius: 10px;
+    font-family: 'Raleway', sans-serif;
+}
+
+.icon{
+    margin: 5px 6px;
+    width: 50px;
+    height: 50px;
+    border: 2px solid #000;
+    text-align: center;
+    display: inline-block;
+    border-radius: 50%;
+    line-height: 60px;
+}
+
+.icon i.fa{
+    font-size: 50px;
+    color: #000;
+}
+
 footer{
     margin-top: 30px;
     height: 150px;
@@ -458,6 +488,21 @@ footer h3{
         font-size: 2.5rem;
         padding: 10px;
 
+    }
+
+    .cart-content{
+        font-family: 'Raleway', sans-serif;
+        display: none;
+        position: absolute; 
+        z-index: 1; /* Sit on top */
+        left: 25%;
+        top: 2%;
+        width: 50%; /* Full width */
+      /* height: 60%;  */
+      /* overflow: hidden; Enable scroll if needed */
+      /* background-color: rgb(0,0,0); Fallback color */
+      /* background-color: rgba(0,0,0,0.4); Black w/ opacity */
+        background:rgba(255,255,255, 1);
     }
 
     footer{
