@@ -38,18 +38,16 @@ var products = [{
 ]
 var sN = 1;
 
-var intro = document.querySelector('.intro');
-var cartIcon = document.querySelector('.cart-icon');
-var cartContent = document.querySelector('.cart-content')
+const intro = document.querySelector('.intro');
+const cartIcon = document.querySelector('.cart-icon');
+const cartContent = document.querySelector('.cart-content')
 cartIcon.addEventListener('click', () => {
     cartContent.style.display = 'block';
-    intro.style.backgroundColor = 'RGBA(255,205,158,0.36)';
-    intro.style.backgroundColor = '#FFCD9E';
 })
 
 
 var tableContent = document.querySelector('.table-content');
-var cartButtons = document.querySelectorAll('.add-to-cart');
+const cartButtons = document.querySelectorAll('.add-to-cart');
 var cartCounter = document.querySelector('span');
 const tableHeader = document.querySelector('.table-header');
 
@@ -64,6 +62,7 @@ for (let i = 0; i < cartButtons.length; i++) {
 // ADD ITEM TO CART 
 function addToCart(e) {
     
+
     let targetButton = e.target;
     // for (let i = 0; i < products.length; i++) {
     //     if (targetButton.parentElement.id === products[i].id) {
@@ -78,7 +77,7 @@ function addToCart(e) {
     var title = Item.name;
     var price = Item.price;
     var Id  = Item.id;
-    var Index = Item.index;
+    var Index = 0;
 
     // var itemsInCart = document.getElementsByClassName('cart-title');
     // for (let i = 0; i < itemsInCart.length; i++) {
@@ -87,7 +86,7 @@ function addToCart(e) {
     
     var cartContent = `
         <tr class = "cart-item-row" id = ${Id}>
-            <td>${sN++}</td>
+            <td>${sN + 1}</td>
             <td class = "cart-title">${title}</td>
             <td class = "cart-price"> ${price}</td>
             <td>
@@ -322,12 +321,17 @@ function checkOut() {
     if (telephoneNum == '') {
         setErrorFor(telephone, 'Please enter your telephone number');
         allValid = false;
-    // } else if (typeof(telephoneNum != 'number')) {
-    //     setErrorFor(telephone, 'Phone number can only be numbers');
-    } else if (telephoneNum.length < 11 || telephoneNum.length > 11) {
+    } else if (!typeof(telephoneNum === 'number')) {
+        setErrorFor(telephone, 'Phone number can only be numbers');
+        allValid = false;
+    } else if (telephoneNum.length < 11) {
         setErrorFor(telephone, 'Phone number cannot be less than 11 characters');
         allValid = false;
-    } else{
+    } else if (telephoneNum.length > 11) {
+        setErrorFor(telephone, 'Phone number cannot be more than 11 characters');
+        allValid = false;
+    } 
+    else{
         setSuccessFor(telephone);
         allValid = true;
     }
@@ -376,12 +380,15 @@ function validatePhone() {
     if (telephoneNum == '') {
         setErrorFor(telephone, 'Please enter your telephone number');
       
-    // } else if (typeof(telephoneNum != 'number')) {
-    //     setErrorFor(telephone, 'Phone number can only be numbers');
-    } else if (telephoneNum.length < 11 || telephoneNum.length > 11) {
+    } else if (!typeof(telephoneNum === 'number')) {
+        setErrorFor(telephone, 'Phone number can only be numbers');
+    } else if (telephoneNum.length < 11) {
         setErrorFor(telephone, 'Phone number cannot be less than 11 characters');
-      
-    } else{
+    } else if (telephoneNum.length > 11) {
+        setErrorFor(telephone, 'Phone number cannot be more than 11 characters');
+        allValid = false;
+    }  
+    else{
         setSuccessFor(telephone);
        
     }
@@ -404,14 +411,13 @@ function setSuccessFor(input) {
 
 
 
-
-
 continueShopping.addEventListener('click', closeModal);
 
-//window.onclick = closeModal;
+
+
 // CLOSE CART
 function closeModal() {
-    document.querySelector(".cart-content").style.display = "none"
+    document.querySelector(".container").style.display = "none";
 }
 
 
@@ -472,7 +478,9 @@ Summary.innerHTML += summaryContent;
 }
 
 
-
+function reloadPage() {
+    window.location.reload();
+}
 
 
 
