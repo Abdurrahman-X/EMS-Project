@@ -124,14 +124,14 @@ nav{
 }
 
 @media screen and (max-width: 1000px){
-    #products{
+    #product-items{
         grid-template-columns: 1fr 1fr;
     }
 
 }
 
 @media screen and (max-width: 800px){
-    #products{
+    #product-items{
         grid-template-columns: 1fr;
     }
 }
