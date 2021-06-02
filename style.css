@@ -241,7 +241,7 @@ nav{
     width: 50%; 
     max-width: 100%;
     background:rgba(255,255,255);
-    
+   
     transition: all 300ms ease-in-out;
     opacity: 0.95;
   
@@ -513,7 +513,7 @@ footer h3{
         box-sizing: border-box;
         font-family: 'Raleway', sans-serif;
         display: none;
-        position: fixed; 
+        position: absolute; 
         z-index: 1; /* Sit on top */
         left: 0;
         top: 2%;

@@ -84,10 +84,16 @@ function addToCart(e) {
     // for (let i = 0; i < itemsInCart.length; i++) {
     //     console.log(itemsInCart.innerText);
     // }
-    
+    // let cartIndex = document.querySelectorAll('.cart-index');
+    // for (let i = 0; i < cartIndex.length; i++) {
+    //     var origi = cartIndex[i].innerText;
+    //     origi = i + 1; 
+
+    // }
+   
     var cartDetails = `
         <tr class = "cart-item-row" id = ${Id}>
-            <td>${sN++}</td>
+            <td class = "cart-index">${origi}</td>
             <td class = "cart-title">${title}</td>
             <td class = "cart-price"> ${price}</td>
             <td>
@@ -101,6 +107,8 @@ function addToCart(e) {
         </tr>
     
 `;
+
+
 
         tableContent.innerHTML += cartDetails;
         targetButton.style.backgroundColor = '#FFED96';
@@ -228,10 +236,13 @@ function removeCartItem(e) {
         }        
     }
     targetButton.parentElement.parentElement.remove();
+    console.log(document.querySelectorAll('.cart-index'));
+    let cartIndex = document.querySelectorAll('.cart-index');
+    for (let i = 0; i < cartIndex.length; i++) {
+        cartIndex[i].innerText = i + 1; 
+    }
+   
     cartCounter.innerHTML--;
-    
-    
-
     updateCartTotal();
 
 }
@@ -380,16 +391,18 @@ function validateMail() {
 function validatePhone() {
 
     const telephoneNum = telephone.value.trim(); 
+
     if (telephoneNum == '') {
         setErrorFor(telephone, 'Please enter your telephone number');
       
-    } else if (!typeof(telephoneNum === 'number')) {
-        setErrorFor(telephone, 'Phone number can only be numbers');
+      } else if (telephoneNum.type !== 'tel') {
+          setErrorFor(telephone, 'Phone number can only be numbers');
+         
     } else if (telephoneNum.length < 11) {
-        setErrorFor(telephone, 'Phone number cannot be less than 11 characters');
-    } else if (telephoneNum.length > 11) {
-        setErrorFor(telephone, 'Phone number cannot be more than 11 characters');
-        allValid = false;
+         setErrorFor(telephone, 'Phone number cannot be less than 11 characters');
+     } else if (telephoneNum.length > 11) {
+         setErrorFor(telephone, 'Phone number cannot be more than 11 characters');
+         allValid = false;
     }  
     else{
         setSuccessFor(telephone);
