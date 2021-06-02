@@ -41,8 +41,11 @@ var sN = 1;
 const intro = document.querySelector('.intro');
 const cartIcon = document.querySelector('.cart-icon');
 const cartContent = document.querySelector('.cart-content')
+const cartContainer = document.querySelector('.container')
+//console.log(cartContent);
 cartIcon.addEventListener('click', () => {
-    cartContent.style.display = 'block';
+  cartContent.style.display = 'block';
+    //cartContent.style.visibility = 'visible';
 })
 
 
@@ -51,8 +54,6 @@ const cartButtons = document.querySelectorAll('.add-to-cart');
 var cartCounter = document.querySelector('span');
 const tableHeader = document.querySelector('.table-header');
 
-var tableRows = document.querySelectorAll('td');
-console.log(tableRows);
     
 for (let i = 0; i < cartButtons.length; i++) {
     cartButtons[i].addEventListener('click', addToCart);
@@ -84,9 +85,9 @@ function addToCart(e) {
     //     console.log(itemsInCart.innerText);
     // }
     
-    var cartContent = `
+    var cartDetails = `
         <tr class = "cart-item-row" id = ${Id}>
-            <td>${sN + 1}</td>
+            <td>${sN++}</td>
             <td class = "cart-title">${title}</td>
             <td class = "cart-price"> ${price}</td>
             <td>
@@ -101,7 +102,7 @@ function addToCart(e) {
     
 `;
 
-          tableContent.innerHTML += cartContent;
+        tableContent.innerHTML += cartDetails;
         targetButton.style.backgroundColor = '#FFED96';
         targetButton.innerText = "Remove From Cart"; 
         cartCounter.innerHTML++;
@@ -229,6 +230,7 @@ function removeCartItem(e) {
     targetButton.parentElement.parentElement.remove();
     cartCounter.innerHTML--;
     
+    
 
     updateCartTotal();
 
@@ -338,8 +340,9 @@ function checkOut() {
      
     if (allValid == true) {
         //console.log(allValid);
-        closeModal();
-        payWithPaystack();
+        // closeModal();
+        // payWithPaystack();
+        console.log("ok");
     }
     
     
@@ -411,76 +414,76 @@ function setSuccessFor(input) {
 
 
 
-continueShopping.addEventListener('click', closeModal);
+//continueShopping.addEventListener('click', closeModal);
 
 
 
 // CLOSE CART
-function closeModal() {
-    document.querySelector(".container").style.display = "none";
-}
+// function closeModal() {
+//     document.querySelector(".container").style.display = "none";
+// }
 
 
 
 
 
 // INTEGRATE PAYSTACK
-function payWithPaystack() {
-    let handler = PaystackPop.setup({
-      key: 'pk_test_a230251758fb3ae6afc26dde5f95ca6386f05aeb', // Replace with your public key
-      email: document.getElementById("buyer-email").value,
-      amount: document.getElementById("total").innerText.replace('₦', '') * 100,
-      ref: ''+Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
-      // label: "Optional string that replaces customer email"
-      onClose: function(){
-        alert('Window closed.');
-      },
-      callback: function(response){
-        showSummary()
-      }
-    });
-    handler.openIframe();
-  }
+// function payWithPaystack() {
+//     let handler = PaystackPop.setup({
+//       key: 'pk_test_a230251758fb3ae6afc26dde5f95ca6386f05aeb', // Replace with your public key
+//       email: document.getElementById("buyer-email").value,
+//       amount: document.getElementById("total").innerText.replace('₦', '') * 100,
+//       ref: ''+Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+//       // label: "Optional string that replaces customer email"
+//       onClose: function(){
+//         alert('Window closed.');
+//       },
+//       callback: function(response){
+//         showSummary()
+//       }
+//     });
+//     handler.openIframe();
+//   }
         
     
-function showSummary() {
-    document.getElementById('summary').style.display = 'flex';
-    document.getElementById('summary').style.flexDirection = 'column';
-    document.getElementById('summary').style.justifyContent = 'space-around';
-    document.querySelector('#customer-name').innerHTML = buyerName.value;
-    const Summary = document.querySelector('#summary-content')
-    const itemRow = document.querySelectorAll('.cart-item-row');
-    console.log(itemRow);
+// function showSummary() {
+//     document.getElementById('summary').style.display = 'flex';
+//     document.getElementById('summary').style.flexDirection = 'column';
+//     document.getElementById('summary').style.justifyContent = 'space-around';
+//     document.querySelector('#customer-name').innerHTML = buyerName.value;
+//     const Summary = document.querySelector('#summary-content')
+//     const itemRow = document.querySelectorAll('.cart-item-row');
+//     console.log(itemRow);
 
-    itemRow.forEach((element, index) => {
-       let itemName = element.getElementsByClassName('cart-title')[0].innerText;
-      // console.log(itemName);
-       let itemQty = element.getElementsByClassName('root')[0].innerText;
-       //console.log(itemQty);
+//     itemRow.forEach((element, index) => {
+//        let itemName = element.getElementsByClassName('cart-title')[0].innerText;
+//       // console.log(itemName);
+//        let itemQty = element.getElementsByClassName('root')[0].innerText;
+//        //console.log(itemQty);
 
 
-       let summaryContent = `
+//        let summaryContent = `
     
-    <tr>
-        <td>${index + 1}</td>
-        <td>${itemName}</td>
-        <td>${itemQty}</td>
-    </tr>
-`
-Summary.innerHTML += summaryContent;
-    });
+//     <tr>
+//         <td>${index + 1}</td>
+//         <td>${itemName}</td>
+//         <td>${itemQty}</td>
+//     </tr>
+// `
+// Summary.innerHTML += summaryContent;
+//     });
 
-    
-    
     
     
     
-}
+    
+    
+// }
 
 
-function reloadPage() {
-    window.location.reload();
-}
+// function reloadPage() {
+//     window.location.reload();
+// }
 
 
 
