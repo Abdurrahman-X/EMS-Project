@@ -41,7 +41,7 @@ var sN = 1;
 const intro = document.querySelector('.intro');
 const cartIcon = document.querySelector('.cart-icon');
 const cartContent = document.querySelector('.cart-content')
-const cartContainer = document.querySelector('.container')
+//const cartContainer = document.querySelector('.container')
 //console.log(cartContent);
 cartIcon.addEventListener('click', () => {
   cartContent.style.display = 'block';
@@ -93,7 +93,7 @@ function addToCart(e) {
    
     var cartDetails = `
         <tr class = "cart-item-row" id = ${Id}>
-            <td class = "cart-index">${origi}</td>
+            <td class = "cart-index">${sN++}</td>
             <td class = "cart-title">${title}</td>
             <td class = "cart-price"> ${price}</td>
             <td>
@@ -334,7 +334,7 @@ function checkOut() {
     if (telephoneNum == '') {
         setErrorFor(telephone, 'Please enter your telephone number');
         allValid = false;
-    } else if (!typeof(telephoneNum === 'number')) {
+    } else if (telephoneNum.type !== 'tel') {
         setErrorFor(telephone, 'Phone number can only be numbers');
         allValid = false;
     } else if (telephoneNum.length < 11) {
@@ -427,76 +427,71 @@ function setSuccessFor(input) {
 
 
 
-//continueShopping.addEventListener('click', closeModal);
+continueShopping.addEventListener('click', closeModal);
 
 
 
-// CLOSE CART
-// function closeModal() {
-//     document.querySelector(".container").style.display = "none";
-// }
+//CLOSE CART
+function closeModal() {
+    document.querySelector(".cart-content").style.display = "none";
+}
 
 
 
 
 
 // INTEGRATE PAYSTACK
-// function payWithPaystack() {
-//     let handler = PaystackPop.setup({
-//       key: 'pk_test_a230251758fb3ae6afc26dde5f95ca6386f05aeb', // Replace with your public key
-//       email: document.getElementById("buyer-email").value,
-//       amount: document.getElementById("total").innerText.replace('₦', '') * 100,
-//       ref: ''+Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
-//       // label: "Optional string that replaces customer email"
-//       onClose: function(){
-//         alert('Window closed.');
-//       },
-//       callback: function(response){
-//         showSummary()
-//       }
-//     });
-//     handler.openIframe();
-//   }
+function payWithPaystack() {
+    let handler = PaystackPop.setup({
+      key: 'pk_test_a230251758fb3ae6afc26dde5f95ca6386f05aeb', // Replace with your public key
+      email: document.getElementById("buyer-email").value,
+      amount: document.getElementById("total").innerText.replace('₦', '') * 100,
+      ref: ''+Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+      // label: "Optional string that replaces customer email"
+      onClose: function(){
+        alert('Window closed.');
+      },
+      callback: function(response){
+        showSummary()
+      }
+    });
+    handler.openIframe();
+  }
         
     
-// function showSummary() {
-//     document.getElementById('summary').style.display = 'flex';
-//     document.getElementById('summary').style.flexDirection = 'column';
-//     document.getElementById('summary').style.justifyContent = 'space-around';
-//     document.querySelector('#customer-name').innerHTML = buyerName.value;
-//     const Summary = document.querySelector('#summary-content')
-//     const itemRow = document.querySelectorAll('.cart-item-row');
-//     console.log(itemRow);
+function showSummary() {
+    document.getElementById('summary').style.display = 'flex';
+    document.getElementById('summary').style.flexDirection = 'column';
+    document.getElementById('summary').style.justifyContent = 'space-around';
+    document.querySelector('#customer-name').innerHTML = buyerName.value;
+    const Summary = document.querySelector('#summary-content')
+    const itemRow = document.querySelectorAll('.cart-item-row');
+    console.log(itemRow);
 
-//     itemRow.forEach((element, index) => {
-//        let itemName = element.getElementsByClassName('cart-title')[0].innerText;
-//       // console.log(itemName);
-//        let itemQty = element.getElementsByClassName('root')[0].innerText;
-//        //console.log(itemQty);
-
-
-//        let summaryContent = `
-    
-//     <tr>
-//         <td>${index + 1}</td>
-//         <td>${itemName}</td>
-//         <td>${itemQty}</td>
-//     </tr>
-// `
-// Summary.innerHTML += summaryContent;
-//     });
-
-    
-    
-    
-    
-    
-// }
+    itemRow.forEach((element, index) => {
+       let itemName = element.getElementsByClassName('cart-title')[0].innerText;
+      // console.log(itemName);
+       let itemQty = element.getElementsByClassName('root')[0].innerText;
+       //console.log(itemQty);
 
 
-// function reloadPage() {
-//     window.location.reload();
-// }
+       let summaryContent = `
+    
+    <tr>
+        <td>${index + 1}</td>
+        <td>${itemName}</td>
+        <td>${itemQty}</td>
+    </tr>
+`
+Summary.innerHTML += summaryContent;
+    });
+    
+}
+
+
+function reloadPage() {
+    window.location.reload();
+}
 
 
 
