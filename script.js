@@ -334,9 +334,9 @@ function checkOut() {
     if (telephoneNum == '') {
         setErrorFor(telephone, 'Please enter your telephone number');
         allValid = false;
-    } else if (telephoneNum.type !== 'tel') {
-        setErrorFor(telephone, 'Phone number can only be numbers');
-        allValid = false;
+    // } else if (telephoneNum.type !== 'tel') {
+    //     setErrorFor(telephone, 'Phone number can only be numbers');
+    //     allValid = false;
     } else if (telephoneNum.length < 11) {
         setErrorFor(telephone, 'Phone number cannot be less than 11 characters');
         allValid = false;
@@ -350,10 +350,10 @@ function checkOut() {
     }
      
     if (allValid == true) {
-        //console.log(allValid);
-        // closeModal();
-        // payWithPaystack();
-        console.log("ok");
+       
+        closeModal();
+        payWithPaystack();
+        
     }
     
     
@@ -395,8 +395,8 @@ function validatePhone() {
     if (telephoneNum == '') {
         setErrorFor(telephone, 'Please enter your telephone number');
       
-      } else if (telephoneNum.type !== 'tel') {
-          setErrorFor(telephone, 'Phone number can only be numbers');
+    //   } else if (telephoneNum.type !== 'tel') {
+    //       setErrorFor(telephone, 'Phone number can only be numbers');
          
     } else if (telephoneNum.length < 11) {
          setErrorFor(telephone, 'Phone number cannot be less than 11 characters');

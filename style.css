@@ -11,7 +11,7 @@ body{
 .intro{
     background: #FFCD9E;
     text-align: center;
-    max-width: 1800px
+    max-width: 100%;
 }
 
 nav{
@@ -69,13 +69,18 @@ nav{
     justify-content: space-evenly;
 }
 
+.frontal > img {
+    width: 600px;
+    height: 600px;
+}
+
 .frontal > h1{
-    font-size: 4rem;
-    padding: 30px;
+    font-size: 3rem;
+    /* padding: 10px; */
     color: #FF7A00;
-    text-align: start;
+    /* text-align: start; */
     text-transform: uppercase;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Raleway', sans-serif;
     
 }
 
@@ -101,7 +106,7 @@ nav{
     color: #fff;
 }
 #about{
-    /* height: 250px; */
+   
     background-color: black;
     padding: 50px 45px;
     margin: 0;
@@ -130,7 +135,7 @@ nav{
 
 }
 
-@media screen and (max-width: 768px){
+@media screen and (max-width: 680px){
     #product-items{
         grid-template-columns: 1fr;
     }
@@ -233,16 +238,12 @@ nav{
     background-color: #fff;
     margin: auto;
     display: none;
-    transition: all 300ms ease-in-out;
     position: absolute; 
     z-index: 1; 
     top: 2%;
-    left: 25%;
-    width: 50%; 
-    max-width: 100%;
+    left: 10%;
+    width: 70%; 
     background:rgba(255,255,255);
-   
-    transition: all 300ms ease-in-out;
     opacity: 0.95;
   
 } 
@@ -284,6 +285,7 @@ position: absolute;
 .table-content tr{
     border-bottom: 1px solid #dddddd;
     font-weight: bold;
+    
 }
 
 .root{
@@ -403,7 +405,6 @@ input:focus{
 
 #summary{
     margin: auto;
-    display: none;
     margin: auto;
     display: none;
     position: absolute; 
@@ -418,6 +419,13 @@ input:focus{
 
 #summary span {
     color: #FF7A00;
+}
+
+#summary img{
+    width: 110px;
+    height: 110px;
+    margin-left: 45%;
+    
 }
 #summary h1, h2{
     text-align: center;
@@ -484,9 +492,143 @@ footer h3{
     font-family: 'Raleway', sans-serif;
 }
 
+@media screen and (max-width: 1000px){
+    .cart-content{
+        box-sizing: border-box;
+        font-family: 'Raleway', sans-serif;
+        display: none;
+        position: absolute; 
+        z-index: 1; 
+        left: 5%;
+        top: 2%;
+        width: 90%;
+        background:rgba(255,255,255, 1);
+    }
+
+    
+    
+    /* input{
+        display: block;
+        width: 100%;
+        padding: 5px;
+        background: #FFCD9E;
+        border-radius: 2px;
+    }
+
+    
+    .table-header{
+        border-collapse: collapse;
+        font-size: .9em;
+        margin: 15px 0;
+        font-family: 'Raleway', sans-serif;
+    }
+
+    .table-header th,
+    .table-header td {
+        padding: 15px 25px;
+    }
+
+    .root{
+        margin: 0 8px;
+    }
+
+    .quantity-btn{
+        width: 70px;
+    } */
+}
 
 
-@media screen and (max-width: 800px){
+
+@media screen and (max-width: 768px){
+    .logo{
+        display: none;
+    }
+
+    nav{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding-top: 10px;   
+    }
+
+    .cart-icon{
+        width: 110px;
+    }
+
+    .intro{
+        max-width: 100%;
+    }
+
+    .frontal{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .frontal > img{
+        width: 500px;
+        height: 500px;
+    }
+    .frontal > h1{
+        text-align: center;
+        font-size: 3.5rem;
+        padding: 10px;
+
+    }
+
+    .cart-content{
+        box-sizing: border-box;
+        font-family: 'Raleway', sans-serif;
+        display: none;
+        position: absolute; 
+        z-index: 1; /* Sit on top */
+        left: 5%;
+        top: 2%;
+        width: 90%;
+        
+        background:rgba(255,255,255, 1);
+    }
+
+    
+    input{
+        display: block;
+        width: 75;
+        padding: 5px;
+        background: #FFCD9E;
+        /* border: 3px solid #dddddd; */
+        border-radius: 2px;
+    }
+
+    
+    .table-header{
+        border-collapse: collapse;
+        font-size: .7em;
+        margin: 10px 0;
+        font-family: 'Raleway', sans-serif;
+    }
+
+    .table-header th,
+    .table-header td {
+        padding: 8px 8px;
+    }
+
+    .root{
+        margin: 0;
+    }
+
+    .quantity-btn{
+        width: 40px;
+    }
+
+    footer{
+        display: flex;
+        flex-direction: column;
+    }
+    footer h3{
+        margin-top: 20px;
+    }
+}
+
+@media screen and (max-width: 450px){
     .logo{
         display: none;
     }
@@ -498,14 +640,28 @@ footer h3{
         padding-top: 10px;   
     }
 
+    .cart-icon{
+        width: 110px;
+    }
+
+    .intro{
+        max-width: 100%;
+    }
+
     .frontal{
         display: flex;
         flex-direction: column;
     }
+
+    .frontal > img{
+        width: 300px;
+        height: 300px;
+    }
+
     .frontal > h1{
         text-align: center;
-        font-size: 2.5rem;
-        padding: 10px;
+        font-size: 1.5rem;
+        padding: 5px;
 
     }
 
@@ -514,13 +670,37 @@ footer h3{
         font-family: 'Raleway', sans-serif;
         display: none;
         position: absolute; 
-        z-index: 1; /* Sit on top */
-        left: 0;
-        top: 2%;
-        width: 100%; /* Full width */
-      /* height: 60%;  */
-        /* overflow: auto; */
+        z-index: 1;
         background:rgba(255,255,255, 1);
+    }
+    
+    input{
+        display: block;
+        padding: 5px;
+        background: #FFCD9E;
+        border-radius: 2px;
+    }
+
+    
+    .table-header{
+        border-collapse: collapse;
+        font-size: .45em;
+        margin: 10px 0;
+        font-family: 'Raleway', sans-serif;
+    }
+
+    .table-header th,
+    .table-header tr
+    .table-header td {
+        padding: 5px 5px;
+    }
+
+    .root{
+        margin: 0;
+    }
+
+    .quantity-btn{
+        width: 20px;
     }
 
     footer{
@@ -528,8 +708,6 @@ footer h3{
         flex-direction: column;
     }
     footer h3{
-        margin-top: 20px;
+        margin-top: 10px;
     }
-
-   
 }
