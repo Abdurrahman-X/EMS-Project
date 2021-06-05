@@ -405,7 +405,7 @@ input:focus{
 
 #summary{
     margin: auto;
-    display: block;
+    display: none;
     position: absolute; 
     z-index: 1; 
     left: 25%;
