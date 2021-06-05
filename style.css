@@ -405,7 +405,7 @@ input:focus{
 
 #summary{
     margin: auto;
-    display: none;
+    display: block;
     position: absolute; 
     z-index: 1; 
     left: 25%;
@@ -420,11 +420,15 @@ input:focus{
     color: #FF7A00;
 }
 
+#summary .img-container{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
 #summary img{
     width: 110px;
     height: 110px;
-    margin-left: 45%;
-   
 }
 #summary h1, h2{
     text-align: center;
@@ -498,7 +502,7 @@ footer h3{
         left: 25%;
         top: 2%;
         width: 50%;
-        height: 100vh; 
+        /* height: 100vh;  */
         background:rgba(255,255,255);
         opacity: 0.9;
     }
@@ -510,8 +514,6 @@ footer h3{
     #summary img{
         width: 110px;
         height: 110px;
-        margin-left: 45%;
-       
     }
     #summary h1, h2{
         text-align: center;
@@ -619,11 +621,10 @@ footer h3{
         font-family: 'Raleway', sans-serif;
         display: none;
         position: absolute; 
-        z-index: 1; /* Sit on top */
+        z-index: 1; 
         left: 5%;
         top: 2%;
         width: 90%;
-        
         background:rgba(255,255,255, 1);
     }
 
@@ -650,10 +651,6 @@ footer h3{
         padding: 8px 8px;
     }
 
-    .root{
-        margin: 0;
-    }
-
     .quantity-btn{
         width: 40px;
     }
@@ -663,23 +660,22 @@ footer h3{
         display: none;
         position: absolute; 
         z-index: 1; 
-        left: 25%;
+        left: 15%;
         top: 2%;
-        width: 50%;
-        height: 100vh; 
+        width: 70%;
+        /* height: 100vh;  */
         background:rgba(255,255,255);
         opacity: 0.9;
     }
     
     #summary span {
         color: #FF7A00;
+
     }
     
     #summary img{
         width: 80px;
         height: 80px;
-        margin-left: 25%;
-       
     }
     #summary h1, h2{
         text-align: center;
@@ -723,30 +719,6 @@ footer h3{
 }
 
 @media screen and (max-width: 450px){
-    .logo{
-        display: none;
-    }
-
-    nav{
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-        padding-top: 10px;   
-    }
-
-    .cart-icon{
-        width: 110px;
-    }
-
-    .intro{
-        max-width: 100%;
-    }
-
-    .frontal{
-        display: flex;
-        flex-direction: column;
-    }
-
     .frontal > img{
         width: 300px;
         height: 300px;
@@ -768,14 +740,6 @@ footer h3{
         background:rgba(255,255,255, 1);
     }
     
-    input{
-        display: block;
-        padding: 5px;
-        background: #FFCD9E;
-        border-radius: 2px;
-    }
-
-    
     .table-header{
         border-collapse: collapse;
         font-size: .45em;
@@ -789,12 +753,17 @@ footer h3{
         padding: 5px 5px;
     }
 
-    .root{
-        margin: 0;
+    .table-content tr {
+        border: none;
     }
-
     .quantity-btn{
         width: 20px;
+    }
+
+    .remove-cart-item{
+        font-size: .45em;
+        padding: 5px;
+        margin-right: 70px;
     }
 
     #summary{
@@ -802,10 +771,10 @@ footer h3{
         display: none;
         position: absolute; 
         z-index: 1; 
-        left: 25%;
         top: 2%;
-        width: 50%;
-        height: 100vh; 
+        /* width: 100%; */
+        height: 300px;
+        /* height: 100vh;  */
         background:rgba(255,255,255);
         opacity: 0.9;
     }
@@ -817,7 +786,7 @@ footer h3{
     #summary img{
         width: 45px;
         height: 45px;
-        margin-left: 15%;
+       
        
     }
     #summary h1, h2{
