@@ -21,19 +21,19 @@ var products = [{
     index: 4,
     id: 'p4',
     name: 'MacBook Air',
-    price: 10
+    price: 800000
 },
 {
     index: 5,
     id: 'p5',
     name: 'Apple Watch',
-    price: 20
+    price: 95000
 },
 {
     index: 6,
     id: 'p6',
     name: 'Air Pods',
-    price: 70
+    price: 75000
 },
 ]
 var sN = 1;
