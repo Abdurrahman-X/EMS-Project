@@ -1,5 +1,5 @@
 // PRODUCTS LIST
-var products = [{
+const products = [{
     index: 1,
     id: 'p1',
     name: 'Samsung TV',
@@ -36,25 +36,27 @@ var products = [{
     price: 75000
 },
 ]
+
+// SELECTORS
 var sN = 1;
 
 const intro = document.querySelector('.intro');
 const cartIcon = document.querySelector('.cart-icon');
 const cartContent = document.querySelector('.cart-content')
-//const cartContainer = document.querySelector('.container')
-//console.log(cartContent);
+
 cartIcon.addEventListener('click', () => {
   cartContent.style.display = 'block';
-    //cartContent.style.visibility = 'visible';
+    
 })
 
 
-var tableContent = document.querySelector('.table-content');
+const tableContent = document.querySelector('.table-content');
 const cartButtons = document.querySelectorAll('.add-to-cart');
-var cartCounter = document.querySelector('span');
+const cartCounter = document.querySelector('span');
 const tableHeader = document.querySelector('.table-header');
+var cartItemRows = document.getElementsByClassName('.cart-item-row');
 
-    
+
 for (let i = 0; i < cartButtons.length; i++) {
     cartButtons[i].addEventListener('click', addToCart);
 }
@@ -62,74 +64,95 @@ for (let i = 0; i < cartButtons.length; i++) {
 
 // ADD ITEM TO CART 
 function addToCart(e) {
-    
-
-    let targetButton = e.target;
-    // for (let i = 0; i < products.length; i++) {
-    //     if (targetButton.parentElement.id === products[i].id) {
-    //         console.log('found!');
-    //     } 
-    // }
+   let targetButton = e.target;
    const Item = products.find( ({id}) => id === targetButton.parentElement.id);
-    //console.log(Item.id);
+
   
-   if (Item.id === targetButton.parentElement.id) {
+   if (targetButton.innerText === "ADD TO CART") {
+       
+        if (Item.id === targetButton.parentElement.id) {
+         var title = Item.name;
+         var price = Item.price;
+         var Id  = Item.id;
+ 
+     var cartDetails = `
+         <tr class = "cart-item-row" id = ${Id}>
+             <td class = "cart-index">${sN++}</td>
+             <td class = "cart-title">${title}</td>
+             <td class = "cart-price"> ${price}</td>
+             <td>
+                 <div class="container">
+                     <button class = "quantity-btn quantity-btn-minus  ${price} ${Id} ">-</button>
+                     <h2 class="root"> 1 </h2>
+                     <button class = "quantity-btn quantity-btn-plus ${price} ${Id}">+</button><br>
+                 </div>
+             </td>
+             <td><button class="remove-cart-item" type="button">Remove</button></td>
+         </tr>
+     
+ `;
+ 
+ 
+         tableContent.innerHTML += cartDetails;
+         targetButton.style.backgroundColor = '#FFED96';
+         targetButton.innerText = "Remove From Cart"; 
+         cartCounter.innerHTML++;
+    }
+         //targetButton.disabled = true;    
    
-    var title = Item.name;
-    var price = Item.price;
-    var Id  = Item.id;
-    var Index = 0;
-
-    // var itemsInCart = document.getElementsByClassName('cart-title');
-    // for (let i = 0; i < itemsInCart.length; i++) {
-    //     console.log(itemsInCart.innerText);
-    // }
-    // let cartIndex = document.querySelectorAll('.cart-index');
-    // for (let i = 0; i < cartIndex.length; i++) {
-    //     var origi = cartIndex[i].innerText;
-    //     origi = i + 1; 
-
-    // }
-   
-    var cartDetails = `
-        <tr class = "cart-item-row" id = ${Id}>
-            <td class = "cart-index">${sN++}</td>
-            <td class = "cart-title">${title}</td>
-            <td class = "cart-price"> ${price}</td>
-            <td>
-                <div class="container">
-                    <button class = "quantity-btn quantity-btn-minus  ${price} ${Id} ">-</button>
-                    <h2 class="root"> 1 </h2>
-                    <button class = "quantity-btn quantity-btn-plus ${price} ${Id}">+</button><br>
-                </div>
-            </td>
-            <td><button class="remove-cart-item" type="button">Remove</button></td>
-        </tr>
+    } else{
+       //console.log(targetButton.innerText);
+       targetButton.style.backgroundColor = '#FF9A3D';
+       targetButton.innerText = "Add To Cart"; 
+       var removeItem = document.querySelector(`.table-content #${Item.id}`);
+       console.log(removeItem);
+        removeItem.remove();
     
-`;
-
-
-
-        tableContent.innerHTML += cartDetails;
-        targetButton.style.backgroundColor = '#FFED96';
-        targetButton.innerText = "Remove From Cart"; 
-        cartCounter.innerHTML++;
-        targetButton.disabled = true;
+       //console.log(document.querySelectorAll('.cart-index'));
+        let cartIndex = document.querySelectorAll('.cart-index');
+        for (let i = 0; i < cartIndex.length; i++) {
+            cartIndex[i].innerText = i + 1;
+        }
+        sN--;
         
+   
+        cartCounter.innerHTML--;
+        updateCartTotal();
+   }
 
+        
+      
         let incrementButtons = document.querySelectorAll('.quantity-btn-plus');
         //console.log(incrementButtons);
         for (let i = 0; i < incrementButtons.length; i++) {
-            incrementButtons[i].addEventListener('click', e => {
-            var targetButton = e.target;
+            incrementButtons[i].addEventListener('click', increment);
+    }
+
+        let decrementButtons = document.getElementsByClassName("quantity-btn-minus");
+        for (let i = 0; i < decrementButtons.length; i++) {
+            decrementButtons[i].addEventListener('click', decrement);
+        }
+
+        
+        var itemsRemoved = tableContent.getElementsByClassName('remove-cart-item');
+        for (let i = 0; i < itemsRemoved.length; i++) {
+            itemsRemoved[i].addEventListener('click', removeCartItem);
+        }  
+    
+
+   updateCartTotal();
+
+}
+
+// INCREMENT QUANTITY
+function increment(e) {
+    var targetButton = e.target;
             var root = targetButton.parentElement.children[1];
             var rootValue = root.innerText;
             var newQty = parseInt(rootValue) + 1;
             root.innerText = newQty;
-                
-            //let classes =  document.querySelector('.quantity-btn-plus');
+            
             let allClasses = targetButton.classList;
-           //console.log(allClasses);
 
            let basePrice;
            let itemId;
@@ -141,53 +164,12 @@ function addToCart(e) {
                 }
                 if (i === 3) {
                     itemId = allClasses[3];
-                    //console.log(allClasses[3]);
                 } 
                 
             }
             
             updatePrice(e, itemId, basePrice)
             updateCartTotal();
-       });
-        
-    }
-
-        let decrementButtons = document.getElementsByClassName("quantity-btn-minus");
-        for (let i = 0; i < decrementButtons.length; i++) {
-            decrementButtons[i].addEventListener('click', decrement);
-        }
-
-        // var cartPrices = document.getElementsByClassName('cart-price');
-        // for (let i = 0; i < cartPrices.length; i++) {
-        //     cartPrices[i].addEventListener('click', updatePrice)
-            
-        // }
-
-        var itemsRemoved = tableContent.getElementsByClassName('remove-cart-item');
-        for (let i = 0; i < itemsRemoved.length; i++) {
-            itemsRemoved[i].addEventListener('click', removeCartItem);
-        }  
-   }   
-   
-   updateCartTotal();
-
-}
-
-// INCREMENT QUANTITY
-function increment(e) {
-     var targetButton = e.target;
-     //console.log(targetButton);
-     var root = targetButton.parentElement.children[1];
-     var rootValue = root.innerText;
-     var newQty = parseInt(rootValue) + 1;
-     root.innerText = newQty;
-     
-     updatePrice(e)
-     updateCartTotal();
-     
-     //updatePrice(e);
-     
-     //updateCartTotal();
 }
 
 
@@ -236,18 +218,20 @@ function removeCartItem(e) {
         }        
     }
     targetButton.parentElement.parentElement.remove();
-    console.log(document.querySelectorAll('.cart-index'));
+    //console.log(document.querySelectorAll('.cart-index'));
     let cartIndex = document.querySelectorAll('.cart-index');
     for (let i = 0; i < cartIndex.length; i++) {
-        cartIndex[i].innerText = i + 1; 
+        cartIndex[i].innerText = i + 1;
     }
+    sN--;
+    
    
     cartCounter.innerHTML--;
     updateCartTotal();
 
 }
 
- 
+ // UPDATE INDIVIDUAL PRICES
 function updatePrice(e, itemId, basePrice) {
     let targetButton = e.target;
         let targetChild = document.querySelector(`#${itemId} .cart-price`);        
@@ -459,6 +443,7 @@ function payWithPaystack() {
   }
         
     
+  // SHOW SUMMARY UPON SUCCESSFUL PURCHASE
 function showSummary() {
     document.getElementById('summary').style.display = 'flex';
     document.getElementById('summary').style.flexDirection = 'column';
@@ -466,13 +451,14 @@ function showSummary() {
     document.querySelector('#customer-name').innerHTML = buyerName.value;
     const Summary = document.querySelector('#summary-content')
     const itemRow = document.querySelectorAll('.cart-item-row');
-    console.log(itemRow);
+    
+
 
     itemRow.forEach((element, index) => {
        let itemName = element.getElementsByClassName('cart-title')[0].innerText;
-      // console.log(itemName);
+    
        let itemQty = element.getElementsByClassName('root')[0].innerText;
-       //console.log(itemQty);
+      
 
 
        let summaryContent = `
@@ -489,9 +475,12 @@ Summary.innerHTML += summaryContent;
 }
 
 
+
+// RELOAD PAGE AFTER ACKNOWLEDGING SUMMARY
 function reloadPage() {
     window.location.reload();
 }
+
 
 
 
