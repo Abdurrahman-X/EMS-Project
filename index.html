@@ -180,7 +180,7 @@
                     </div>
                     
                     <div class="form-control">
-                        <input type="tel" id="buyer-number" pattern="[0-9]" placeholder="Your Phone Number" onblur="validatePhone()">
+                        <input type="tel" id="buyer-number" pattern="[0-9]" placeholder="Your Phone Number" onkeypress = "return onlyNumberKey(event)" onblur="validatePhone()">
                         <div>Error Message</div>
                     </div>
                 </form>

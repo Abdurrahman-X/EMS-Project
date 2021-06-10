@@ -279,6 +279,18 @@ const telephone = document.getElementById('buyer-number');
 const error = document.getElementsByClassName('error-msg');
 checkoutForm.addEventListener('click', checkOut);
 
+function onlyNumberKey(evt) {
+    var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+    if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57)){
+        return setErrorFor(telephone, 'Phone number can only be numbers');
+    } else{
+        return setSuccessFor(telephone);
+    }
+        
+}
+    
+    
+
 
 // CHECKOUT FUNCTION
 function checkOut() {
